@@ -12,12 +12,14 @@ public class LibraryController {
     private final MainMenuView mainMenuView;
     private final BookView bookView;
     private final BookService bookService;
+    private final MemberController memberController;
 
     public LibraryController() {
 
         mainMenuView = new MainMenuView();
         bookView = new BookView();
         bookService = new BookService();
+        memberController = new MemberController();
     }
 
     public void start() {
@@ -35,6 +37,7 @@ public class LibraryController {
 
                 case 2:
                     System.out.println("Member Management");
+                    memberController.start();
                     break;
 
                 case 3:
@@ -93,13 +96,14 @@ public class LibraryController {
 
                     case 4:
                         System.out.println("Update Book");
-                        updateBook();
                         System.out.println("--------------------------------");
+                        updateBook();
                         break;
 
                     case 5:
                         System.out.println("Delete Book");
                         System.out.println("--------------------------------");
+                        deleteBook();
                         break;
 
                     case 6:
@@ -113,6 +117,17 @@ public class LibraryController {
 
         }
 
+    }
+
+    private void deleteBook() {
+        String bookId = bookView.inputBookId();
+        boolean deleted = bookService.deleteBook(bookId);
+
+        if (deleted){
+            bookView.displayMessage("Book deleted successfully");
+        }else {
+            bookView.displayMessage("Book not found!!");
+        }
     }
 
     private void updateBook() {
@@ -139,6 +154,10 @@ public class LibraryController {
 
     private void viewAllBooks() {
        var books = bookService.getAllBooks();
+       if (books.isEmpty()){
+           bookView.displayMessage("No Book Available!!");
+           return;
+       }
        bookView.displayBooks(books);
     }
 

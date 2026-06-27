@@ -4,7 +4,7 @@ import utils.InputHelper;
 
 public class MainMenuView {
 
-    public void displayMainMenu(){
+    public void displayMainMenu() {
 
         System.out.println("=================================");
         System.out.println("   Library Management System");
@@ -18,7 +18,7 @@ public class MainMenuView {
         System.out.println("6. Exit");
     }
 
-    public int getUserChoice(){
+    public int getUserChoice() {
         return InputHelper.readInt("Enter Your Choose:  ");
     }
 }

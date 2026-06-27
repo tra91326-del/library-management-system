@@ -40,28 +40,20 @@ public class BookView {
         String category = InputHelper.readString("Enter Category: ");
         int year = InputHelper.readInt("Enter Year: ");
 
-        Book book = new Book(id,title,author,category,year,false);
-
-        return book;
+        return new Book(id,title,author,category,year,false);
     }
 
     // search book by book id
-
     public String inputBookId(){
         return InputHelper.readString("Enter Book Id: ");
     }
 
     // for view all books
     public void displayBooks(List<Book> books){
-
-        if (books.isEmpty()){
-            System.out.println("No Register Book !.");
-        }else {
             for (var book : books){
                 System.out.println(book);
-            }
-        }
 
+            }
     }
 
     // for single book
