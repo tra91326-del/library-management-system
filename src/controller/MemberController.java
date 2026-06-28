@@ -11,8 +11,8 @@ public class MemberController {
     private final MemberView memberView;
 
 
-    public MemberController(){
-        memberService = new MemberService();
+    public MemberController(MemberService memberService){
+        this.memberService = memberService;
         memberView = new MemberView();
 
     }
@@ -28,32 +28,27 @@ public class MemberController {
             switch (choice){
 
                 case 1:
-                    memberView.displayMessage("Add Member");
+
                     addMember();
                     break;
                 case 2:
-                    memberView.displayMessage("---------------------------");
-                    memberView.displayMessage("2. View Members");
-                    memberView.displayMessage("---------------------------");
                     viewAllMember();
                     break;
                 case 3:
-                    memberView.displayMessage("3. Search Member");
                     viewMemberById();
                     break;
                 case 4:
-                    memberView.displayMessage("4. Update Member");
                     updateMember();
                     break;
                 case 5:
-                    memberView.displayMessage("5. Delete Member");
-                    deleteMember();
+                   deleteMember();
                     break;
                 case 6:
                     back = true;
                     break;
                 default: {
-                    memberView.displayMessage( "Invalid Choice");
+                    System.out.println();
+                    memberView.displayMessage( "INVALID CHOICE");
                 }
             }
 
@@ -66,10 +61,12 @@ public class MemberController {
         String memberId = memberView.inputMemberId();
         boolean deleted = memberService.deleteMemberById(memberId);
         if (deleted){
-            memberView.displayMessage("Member Deleted Successfully");
+            System.out.println();
+            memberView.displayMessage("MEMBER DELETED SUCCESSFULLY");
             return;
         }
-        memberView.displayMessage("No Found!!");
+        System.out.println();
+        memberView.displayMessage("MEMBER NOT FOUND");
     }
 
     private void updateMember() {
@@ -78,28 +75,33 @@ public class MemberController {
 
         Member member = memberService.searchMemberById(memberId);
         if (member == null){
-            memberView.displayMessage("No Member !!");
+            System.out.println();
+            memberView.displayMessage("MEMBER NOT FOUND");
             return;
         }
 
         memberView.inputUpdateMember(member);
-        memberView.displayMessage("Member Update successfully");
+        System.out.println();
+        memberView.displayMessage("MEMBER UPDATE SUCCESSFULLY");
     }
 
     private void addMember() {
         Member member = memberView.inputMember();
         if (memberService.existsMemberById(member.getId())){
-            memberView.displayMessage("Member already exists");
+            System.out.println();
+            memberView.displayMessage("MEMBER ALREADY EXISTS");
             return;
         }
         memberService.addMember(member);
-        memberView.displayMessage("Member created successfully");
+        System.out.println();
+        memberView.displayMessage("MEMBER CREATED SUCCESSFULLY");
     }
 
     private void viewMemberById() {
         Member member = memberService.searchMemberById(memberView.inputMemberId());
         if (member == null){
-            System.out.println("No Found");
+            System.out.println();
+            System.out.println("MEMBER NOT FOUND");
             return;
         }
         memberView.displayMember(member);
@@ -108,7 +110,8 @@ public class MemberController {
     private void viewAllMember() {
         var members = memberService.getAllMembers();
         if (members.isEmpty()){
-            System.out.println("No Member!!");
+            System.out.println();
+            System.out.println("MEMBER NOT FOUND");
             return;
         }
         memberView.displayAllMember(memberService.getAllMembers());

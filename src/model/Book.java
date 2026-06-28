@@ -7,7 +7,7 @@ public class Book {
     private String author;
     private String category;
     private int year;
-    private final boolean borrowed;
+    private  boolean borrowed;
 
     public Book(String id, String title, String author, String category, int year, boolean borrowed) {
         this.id = id;
@@ -66,8 +66,12 @@ public class Book {
         this.year = year;
     }
 
+
     public boolean isBorrowed() {
         return borrowed;
     }
 
+    public void setBorrowed(boolean borrowed) {
+        this.borrowed = borrowed;
+    }
 }

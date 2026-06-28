@@ -17,9 +17,9 @@ public class BookView {
     // to show book menu
     public void displayBookMenu() {
 
-        System.out.println("=================================");
-        System.out.println("  Book  Management ");
-        System.out.println("=================================");
+        System.out.println("============================================================");
+        System.out.println("              BOOK MANAGEMENT");
+        System.out.println("============================================================");
 
         System.out.println("1. Add Book");
         System.out.println("2. View All Books");
@@ -27,6 +27,8 @@ public class BookView {
         System.out.println("4. Update Book");
         System.out.println("5. Delete Book");
         System.out.println("6. Back");
+
+        System.out.println("------------------------------------------------------------");
 
     }
 
@@ -50,15 +52,20 @@ public class BookView {
 
     // for view all books
     public void displayBooks(List<Book> books){
-            for (var book : books){
-                System.out.println(book);
 
+        printBookHeader(" BOOK LISTS");
+
+
+        for (var book : books){
+            printBookBody(book);
             }
     }
 
     // for single book
     public void displayBook(Book book){
-        System.out.println(book);
+        printBookHeader(" BOOK INFORMATION");
+        printBookBody(book);
+
     }
 
     // for user message
@@ -70,9 +77,8 @@ public class BookView {
     public void inputUpdateBook(Book book) {
 
         //current book information
-        System.out.println("Current Book Information");
-        System.out.println(book);
-        System.out.println("----------------------");
+        printBookHeader("CURRENT BOOK INFORMATION");
+        printBookBody(book);
 
         //new book data
 
@@ -105,6 +111,40 @@ public class BookView {
             }
 
         }
+
+    }
+
+    private void printBookHeader(String title){
+        System.out.println("==============================================================");
+        System.out.printf("                    %s%n ",title);
+        System.out.println("==============================================================");
+        System.out.println();
+
+        //table header
+        System.out.printf("%-8s %-15s %-15s %-15s %-6s%n",
+                "ID",
+                "TITLE",
+                "AUTHOR",
+                "CATEGORY",
+                "YEAR"
+        );
+        System.out.println("---------------------------------------------------------------------");
+
+    }
+
+    private void printBookBody(Book book){
+
+        //table body
+
+        System.out.printf("%-8s %-15s %-15s %-15s %-6s%n",
+                book.getId(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getCategory(),
+                book.getYear()
+        );
+
+        System.out.println();
 
     }
 }
